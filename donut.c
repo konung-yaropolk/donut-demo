@@ -7,13 +7,13 @@
   _=x; \
   x -= mul*y>>shift; \
   y += mul*_>>shift; \
-  _ = 3145728-x*x-y*y>>11; \
+  _ = (3145728-x*x-y*y)>>11; \
   x = x*_>>10; \
   y = y*_>>10;
 
 int8_t b[1760], z[1760];
 
-void main() {
+int main() {
   int sA=1024,cA=0,sB=1024,cB=0,_;
   for (;;) {
     memset(b, 32, 1760);  // text buffer
@@ -34,7 +34,7 @@ void main() {
             x7 = cj*si >> 10,
             x = 40 + 30*(cB*x1 - sB*x4)/x6,
             y = 12 + 15*(cB*x4 + sB*x1)/x6,
-            N = (-cA*x7 - cB*((-sA*x7>>10) + x2) - ci*(cj*sB >> 10) >> 10) - x5 >> 7;
+            N = (((-cA*x7 - cB*((-sA*x7>>10) + x2) - ci*(cj*sB >> 10)) >> 10) - x5) >> 7;
 
         int o = x + 80 * y;
         int8_t zz = (x6-K2)>>15;
@@ -53,4 +53,5 @@ void main() {
     usleep(15000);
     printf("\x1b[23A");
   }
+return 0;
 }
